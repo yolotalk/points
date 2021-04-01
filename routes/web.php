@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConfigsController;
+
 
 Route::redirect("/", "user/signup");
 
@@ -21,6 +23,7 @@ Route::prefix('user')->group(function () {
     Route::match(["GET", "POST"], "signup", [UserController::class, "signup"]);
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get("/", [UserController::class, "users"]);
+Route::prefix('configs')->group(function () {
+    Route::get("/", [ConfigsController::class, "index"]);
+    Route::post("/", [ConfigsController::class, "update"]);
 });
