@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
+use DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +27,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            
+            $sql = "select userid, sum(incr) incr from p_points WHERE YEARWEEK(date_format(created_at,'%Y-%m-%d')) = YEARWEEK(now()) group by userid order by incr desc";
+
+            $top = DB::select($sql);
+            Log::info($top);
+
+        })->weeklyOn(1, '8:00');
     }
 
     /**

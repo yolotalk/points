@@ -12,7 +12,7 @@
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="second-award" class="col-sm-2 control-label">Password*</label>
+			    <label for="second-award" class="col-sm-2 control-label">Second Award*</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="second-award" name="second_award" placeholder="Second Award" value="{{$configs['second_award']}}">
 			    </div>
