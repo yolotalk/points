@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Http\Controllers\UserController;
+
+Route::redirect("/", "user/signup");
+
+Route::prefix('user')->group(function () {
+    Route::match(["GET", "POST"], "signup", [UserController::class, "signup"]);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get("/", [UserController::class, "users"]);
 });
